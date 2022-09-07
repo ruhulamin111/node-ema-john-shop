@@ -36,11 +36,14 @@ async function run() {
             res.send({ countPage })
         })
 
-        // app.post('/product', async (req, res) => {
-        //     const query = { name: 'abc' }
-        //     const result = productCollection.insertOne(query)
-        //     res.send(result)
-        // })
+        app.post('/productkeys', async (req, res) => {
+            const keys = req.body;
+            const ids = keys.map(id => ObjectId(id))
+            const query = { _id: { $in: ids } }
+            const cursor = productCollection.find(query)
+            const result = await cursor.toArray()
+            res.send(result)
+        })
 
     }
     finally {
