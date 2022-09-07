@@ -17,7 +17,6 @@ async function run() {
         const productCollection = client.db("shop").collection("product");
 
         app.get('/product', async (req, res) => {
-            console.log(req.query);
             const query = {}
             const page = parseInt(req.query.page)
             const size = parseInt(req.query.size)
@@ -33,8 +32,6 @@ async function run() {
         })
 
         app.get('/productcount', async (req, res) => {
-            // const query = {}
-            // const cursor = productCollection.find(query)
             const countPage = await productCollection.countDocuments();
             res.send({ countPage })
         })
@@ -44,7 +41,6 @@ async function run() {
         //     const result = productCollection.insertOne(query)
         //     res.send(result)
         // })
-
 
     }
     finally {
